@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f4f1e9" />
+  <meta name="description" content="Track your yoga classes and discover your membership's value, one practice at a time." />
+  <title>Yoga Value — Your Personal Practice</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Yoga Value home"><span class="brand-mark">◌</span> yogavalue<span class="brand-period">.</span></a>
+      <div class="toolbar">
+        <button id="theme-toggle" class="quiet" aria-label="Switch colour theme">Dark mode</button>
+        <button id="settings-open" class="quiet">Membership settings</button>
+      </div>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="eyebrow">MAKE SPACE FOR YOURSELF</div>
+        <h1>Your practice,<br/><em>in perspective.</em></h1>
+        <p>Every class is an investment in you. Watch it add up.</p>
+        <div class="hero-actions">
+          <button id="log-today" class="primary">+ Log today's class</button>
+          <button id="log-earlier" class="outline">Add an earlier class</button>
+        </div>
+      </section>
+      <section class="summary-grid" aria-label="Practice summary">
+        <article class="summary-feature">
+          <span class="eyebrow">YOUR MEMBERSHIP JOURNEY</span>
+          <div class="overline">YOUR COST PER CLASS</div>
+          <div class="money" id="cost-per-class">—</div>
+          <div class="muted" id="cost-caption">Add your membership and your first class to begin.</div>
+        </article>
+        <article class="summary-tile"><span class="eyebrow">GROW AT YOUR OWN PACE</span><strong id="total-classes">0</strong><span>Total classes</span></article>
+        <article class="summary-tile"><span class="eyebrow">LITTLE MOMENTS</span><strong id="month-classes">0</strong><span id="current-month-label">Classes this month</span></article>
+      </section>
+      <section class="section two-up">
+        <article class="panel">
+          <span class="eyebrow">A LITTLE MORE VALUE, EVERY VISIT</span>
+          <h2>Cost per class over time</h2>
+          <p>Your commitment, coming full circle.</p>
+          <div class="chart-area" id="cost-chart" aria-label="Cost per class trend"></div>
+        </article>
+        <article class="panel">
+          <span class="eyebrow">SHOWING UP FOR YOU</span>
+          <h2>Your monthly rhythm</h2>
+          <p>A little consistency goes a long way.</p>
+          <div class="chart-area" id="rhythm-chart" aria-label="Classes per month"></div>
+        </article>
+      </section>
+      <section class="section two-up">
+        <article class="panel">
+          <span class="eyebrow">ONE PRACTICE AT A TIME</span>
+          <h2>Recent classes</h2>
+          <p>Every visit counts.</p>
+          <ol id="recent-list" class="classes"></ol>
+          <button id="add-past" class="outline">Add a past class</button>
+        </article>
+        <article class="panel">
+          <span class="eyebrow">THE DETAILS, TAKEN CARE OF</span>
+          <h2>Your membership</h2>
+          <div id="membership-summary"></div>
+          <button id="edit-membership" class="outline">Set up membership</button>
+          <hr />
+          <h3>Keep your progress safe</h3>
+          <div class="button-row">
+            <button id="export" class="outline">Export JSON backup</button>
+            <label class="upload outline" for="import-file">Import JSON backup</label>
+            <input id="import-file" type="file" accept="application/json,.json" hidden />
+          </div>
+          <p class="small">Saved on this browser only. Your data won't automatically sync across devices.</p>
+        </article>
+      </section>
+    </main>
+    <footer><span>yogavalue<span class="brand-period">.</span></span><span>Progress isn't always a pose. Sometimes, it's simply showing up.</span><span>Private &amp; stored locally</span></footer>
+  </div>
+  <dialog id="membership-dialog" aria-labelledby="membership-dialog-title">
+    <form id="membership-form" class="modal-content">
+      <h2 id="membership-dialog-title">Your membership</h2>
+      <p>Choose your billing amount and when your membership began.</p>
+      <label>Amount (CAD) <input id="membership-amount" type="number" min="0" step="0.01" required /></label>
+      <label>Billing period <select id="membership-period"><option value="annual">Annual</option><option value="monthly">Monthly</option></select></label>
+      <label>Membership start date <input id="membership-start" type="date" required /></label>
+      <div class="button-row"><button type="button" class="outline" data-close="membership-dialog">Cancel</button><button type="submit" class="primary">Save membership</button></div>
+    </form>
+  </dialog>
+  <dialog id="class-dialog" aria-labelledby="class-dialog-title">
+    <form id="class-form" class="modal-content">
+      <h2 id="class-dialog-title">Log a class</h2>
+      <p>Every time you show up, it counts.</p>
+      <label>Class date <input id="class-date" type="date" required /></label>
+      <div class="button-row"><button type="button" class="outline" data-close="class-dialog">Cancel</button><button type="submit" class="primary">Add class</button></div>
+    </form>
+  </dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
