@@ -1,0 +1,26 @@
+name: Static dashboard checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check dashboard JavaScript syntax
+        run: node --check app.js
+      - name: Validate expected site files
+        run: |
+          test -s index.html
+          test -s styles.css
+          test -s app.js
+          test -s README.md
